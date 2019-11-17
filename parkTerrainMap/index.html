@@ -17,6 +17,8 @@
 
     <script src='./geometry.js'></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.6/chroma.min.js"></script>
+
     <script>
         'use strict';
 
@@ -33,17 +35,20 @@
         ];
 
         let points = [];
+        const ppl_p_seg = 30;
         for (let i = 0; i < paths.length; i++) {
-            for (let j = 0; j < Math.floor(Math.random() * (20 - 10 + 1)) + 10; j++) {
+            for (let j = 0; j < Math.floor(Math.random() * (ppl_p_seg - 10 + 1)) + 10; j++) {
                 let point = paths[i].generateRandomPoint();
                 points.push(point);
             }
         }
+        let scale = chroma.scale(['green', 'red']);
+        console.log(scale(paths[0].geometry[0].contains / ppl_p_seg).hex());
         console.log(points);
         console.log(paths);
     </script>
 
-    <script>
+    <!--<script>
         const lineMaterial = new THREE.LineBasicMaterial({
             color: 0x0000ff
         });
@@ -59,7 +64,7 @@
 
         var line = new THREE.Line(geometry, material);
         scene.add(line)
-    </script>
+    </script>-->
 
     <script>
         'use strict';
