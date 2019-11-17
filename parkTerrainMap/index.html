@@ -14,6 +14,7 @@
     <script src='./dependencies/OrbitControls.js'></script>
 
     <script src='./dependencies/three-geo.min.js'></script>
+    <script src='./dependencies/three.meshline.js'></script>
 
     <script src='./geometry.js'></script>
 
@@ -23,15 +24,15 @@
         'use strict';
 
         const paths = [
-            new Line([{ x: -0.62, y: -0.65 }, { x: -0.56, y: -0.36 }]),
-            new Line([{ x: -0.56, y: -0.36 }, { x: -0.65, y: -0.32 }]),
-            new Line([{ x: -0.56, y: -0.36 }, { x: -0.65, y: -0.15 }]),
-            new Line([{ x: -0.56, y: -0.36 }, { x: -0.31, y: -0.26 }]),
-            new Line([{ x: -0.31, y: -0.26 }, { x: -0.14, y: -0.32 }, { x: 0.14, y: -0.65 }]),
-            new Line([{ x: -0.31, y: -0.26 }, { x: -0.15, y: -0.2 }, { x: -0.13, y: 0.3 }]),
+            new Line([{ x: -0.66, y: -0.48 }, { x: -0.56, y: -0.36 }]),
+            new Line([{ x: -0.56, y: -0.36 }, { x: -0.7, y: -0.32 }]),
+            new Line([{ x: -0.56, y: -0.36 }, { x: -0.7, y: -0.15 }]),
+            new Line([{ x: -0.56, y: -0.36 }, { x: -0.22, y: -0.21 }]),
+            new Line([{ x: -0.22, y: -0.21 }, { x: -0.14, y: -0.32 }, { x: 0.14, y: -0.48 }]),
+            new Line([{ x: -0.22, y: -0.21 }, { x: -0.15, y: -0.2 }, { x: -0.13, y: 0.3 }]),
             new Line([{ x: -0.13, y: 0.3 }, { x: -0.15, y: 0.45 }, { x: -0.22, y: 0.65 }]),
             new Line([{ x: -0.13, y: 0.3 }, { x: 0, y: 0.33 }, { x: 0.09, y: 0.44 }, { x: 0.02, y: 0.65 }]),
-            new Line([{ x: 0.35, y: -0.65 }, { x: 0.65, y: -0.62 }])
+            new Line([{ x: 0.35, y: -0.48 }, { x: 0.69, y: -0.38 }])
         ];
 
         let points = [];
@@ -65,6 +66,7 @@
         var line = new THREE.Line(geometry, material);
         scene.add(line)
     </script>-->
+    </script>
 
     <script>
         'use strict';
@@ -168,6 +170,31 @@
                 },
             });
         }
+    </script>
+
+    <script>
+        paths.forEach((line) => {
+            line.geometry.forEach((segment) => {
+                const z = 0.12;
+
+                const lineGeometry = new THREE.Geometry();
+                lineGeometry.vertices.push(
+                    new THREE.Vector3(segment.start.x, segment.start.y, z),
+                    new THREE.Vector3(segment.end.x, segment.end.y, z)
+                );
+
+                const meshLine = new MeshLine();
+                meshLine.setGeometry(lineGeometry);
+
+                const meshMaterial = new MeshLineMaterial({
+                    sizeAttenuation: true,
+                    lineWidth: 0.007,
+                });
+
+                const mesh = new THREE.Mesh(meshLine.geometry, meshMaterial);
+                scene.add(mesh);
+            });
+        });
     </script>
 </body>
 
