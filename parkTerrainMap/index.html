@@ -19,6 +19,23 @@
 
     <script>
         'use strict';
+        const paths = [
+            new Line([[-0.62, -0.65], [-0.56, -0.36]]),
+            new Line([[-0.56, -0.36], [-0.65, -0.32]]),
+            new Line([[-0.56, -0.36], [-0.65, -0.15]]),
+            new Line([[-0.56, -0.36], [-0.31, -0.26]]),
+            new Line([[-0.31, -0.26], [-0.14, -0.32], [0.14, -0.65]]),
+            new Line([[-0.31, -0.26], [-0.15, -0.2], [-0.13, 0.3]]),
+            new Line([[-0.13, 0.3], [-0.15, 0.45], [-0.22, 0.65]]),
+            new Line([[-0.13, 0.3], [0, 0.33], [0.09, 0.44], [0.02, 0.65]]),
+            new Line([[0.35, -0.65], [0.65, -0.62]])
+        ];
+
+        console.log(paths);
+    </script>
+
+    <script>
+        'use strict';
         const MAPBOX_TOKEN = 'pk.eyJ1IjoicmFmYXNvZml6YWRhIiwiYSI6ImNrMzBvdXR5YjAwbjYzaG8ycXF0Z3A0bWoifQ.ynUN6MmkBIkH1YnUkjn9Ng';
 
         const canvas = document.getElementById('canvas');
@@ -97,11 +114,8 @@
             tgeo.getTerrain([67.9667, 24.1333], 9, 12, {
                 onRgbDem: (meshes) => { // your implementation when terrain's geometry is obtained
                     meshes.forEach((mesh) => {
-                        mesh.scale.z = 3;
+                        mesh.scale.z = 3.5;
                         scene.add(mesh);
-
-                        const box = new THREE.Box3().setFromObject(mesh);
-                        console.log(box);
                     });
                     render(); // now render scene after dem meshes are added
                 },
