@@ -3,7 +3,6 @@ import { StaticMap } from 'react-map-gl';
 import DeckGL from 'deck.gl';
 import nationalParksGeojson from './data/nationalParksGeojson.json';
 import { renderLayers } from './layers';
-//import { tooltipStyle } from './style';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoicmFmYXNvZml6YWRhIiwiYSI6ImNrMzBvdXR5YjAwbjYzaG8ycXF0Z3A0bWoifQ.ynUN6MmkBIkH1YnUkjn9Ng';
 
